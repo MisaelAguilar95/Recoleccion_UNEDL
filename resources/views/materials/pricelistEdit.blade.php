@@ -18,11 +18,11 @@
             <div class="row col-md-12">
                 <div class="form-group col-md-4 ">
                     <label class="form-control-label" for="input-username">Nombre:</label>
-                    <input name="title"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="input-group " value="{{ $product->title }}" readonly >
+                    <input name="title"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9, ]/, '')" class="input-group " value="{{ $product->title }}" readonly >
                 </div>
                 <div class="form-group col-md-4 ">
                     <label class="form-control-label" for="input-username">Descripción:</label>
-                    <input name="description"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="input-group" value="{{ $product->description }}" readonly>
+                    <input name="description"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9, ]/, '')" class="input-group" value="{{ $product->description }}" readonly>
                 </div>
                 <div class="form-group col-md-4 ">
                   <label class="form-control-label" for="input-username">Precio X Kilo:</label>
@@ -32,7 +32,7 @@
             <div class="row mt-3">
                 <div class="form-group col-md-4 ">
                     <label class="form-control-label" for="input-username">Código del Producto:</label>
-                    <input name="product_code"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="input-group " value="{{ $product->product_code }}" readonly>
+                    <input name="product_code"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9, ]/, '')" class="input-group " value="{{ $product->product_code }}" readonly>
                 </div>
                 <div class="form-group col-md-4 ">
                   <label class="form-control-label" for="input-username">Fecha de Creación:</label>
@@ -42,7 +42,7 @@
             <hr style="background-color:black">
             <div class="row mt-3">
                 <div class="col-md-6">
-                    <a href="{{ route('materials') }}" type="button" class="btn btn-info">
+                    <a href="{{ route('materials.pricelist') }}" type="button" class="btn btn-info">
                         <span class="material-icons text-md">arrow_back</span>REGRESAR
                     </a>
                 </div>

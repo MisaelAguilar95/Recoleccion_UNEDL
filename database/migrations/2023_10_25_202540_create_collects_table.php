@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('collects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('separation_id');
-            $table->string('qr_code',255)->nullable();
-            $table->string('collected_by')->nullable();
-            $table->text('notes')->nullable();
-            $table->string('img',255)->nullable();
+            $table->string('qr_code',50)->nullable();
+            $table->string('collected_by',50)->nullable();
+            $table->text('notes',100)->nullable();
+            $table->string('img',50)->nullable();
+            $table->string('img_merma',50)->nullable();
             $table->timestamps();
 
 

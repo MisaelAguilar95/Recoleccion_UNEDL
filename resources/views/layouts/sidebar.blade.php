@@ -37,7 +37,7 @@
             </a>
           </li>
           @endif
-          @if (auth()->user()->level == 'administrador' )
+          @if (auth()->user()->level == 'administrador' || auth()->user()->level == 'recolector' )
           <li class="nav-item">
             <a class="nav-link  {{ Request::is('paid') ? 'bg-gradient-primary':'' }} text-white " href="{{ route('collections.paid') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -80,7 +80,7 @@
             </a>
           </li>
         @endif
-        @if (auth()->user()->level == 'administrador' || auth()->user()->level == 'recolector'  )
+        @if (auth()->user()->level == 'administrador' )
           <li class="nav-item">
             <a class="nav-link  {{ Request::is('collections') ? 'bg-gradient-primary':'' }} text-white " href="{{ route('collections') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

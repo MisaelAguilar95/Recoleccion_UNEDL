@@ -14,8 +14,8 @@ class SeparationController extends Controller
     public function index()
     {
         if(auth()->user()->level == 'administrador' || auth()->user()->level == 'usuario' ){
-        $product = separation::orderBy('created_at','DESC')->get();
-        return view('separations.index',compact('separation'));
+        $separations = separation::orderBy('created_at','DESC')->get();
+        return view('validations.index',compact('separations'));
         }else{
             return redirect()->route('profile');
         }
@@ -26,8 +26,13 @@ class SeparationController extends Controller
      */
     public function create()
     {
-        $materials = Product::all()->sortDesc();
-        return view('separations.create', compact('materials'));
+        if(auth()->user()->level == 'administrador' || auth()->user()->level == 'usuario' ){
+            $materials = Product::all()->sortDesc();
+            return view('separations.create', compact('materials'));
+        }
+        else{
+                return redirect()->route('profile');
+            }
     }
 
     /**
@@ -94,6 +99,7 @@ class SeparationController extends Controller
 
         $separation = Separation::findOrFail($id);
         $separation->user_id = $request->user_id;
+        $separation->modify_user_id = $request->modify_user_id;
         $separation->product_id = $request->product_id;
         $separation->weight = $request->weight;
         $separation->num_bags = $request->num_bags;
@@ -118,6 +124,6 @@ class SeparationController extends Controller
 
        $separation = Separation::findOrFail($id);
        $separation->delete();
-       return redirect()->route('separations')->with('success', 'Separación Eliminada de Manera Exitosa');
+       return redirect()->route('validations')->with('success', 'Separación Eliminada de Manera Exitosa');
     }
 }

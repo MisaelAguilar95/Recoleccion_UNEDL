@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function(){
         Route::get('edit/{id}','edit')->name('collections.edit');
         Route::put('edit/{id}','update')->name('collections.update');
         Route::delete('destroy/{id}','destroy')->name('collections.destroy');
+        Route::delete('delete/{id}','delete')->name('collections.delete');
 
     });
 

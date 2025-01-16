@@ -19,11 +19,17 @@ class CollectController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $separations = Separation::where('status', '=','validated')->get();
-        $users = User::where('level', '=','recolector')->get();
-        //dd($users);
-        return view('collections.index',compact('separations', 'users'));
+    { 
+        if(auth()->user()->level == 'administrador' ){
+            $separations = Separation::where('status', '=','validated')->get();
+            $users = User::where('level', '=','recolector')->get();
+            //dd($users);
+            return view('collections.index',compact('separations', 'users'));
+        }
+        else{
+            return redirect()->route('dashboard');
+        }
+       
     }
 
     public function view()
@@ -71,7 +77,6 @@ class CollectController extends Controller
      */
     public function collect(Request $request, string $id)
     {
-        Separation::where('id', $id)->update(array('status' => 'collected'));
         $collect = new Collect();
         if($request->hasfile('img'))
         {
@@ -86,6 +91,7 @@ class CollectController extends Controller
         $collect->notes = $request->notes;
         $collect->img = $filename;
         if($collect->save()){
+            Separation::where('id', $id)->update(array('status' => 'collected'));
             return redirect()->route('collections')->with('success', 'Recolección Creada de manera Exitosa');
         }
         else{
@@ -109,10 +115,10 @@ class CollectController extends Controller
             $receivers = 'misadina95@gmail.com';
             $data = Separation::all();
             Mail::to($receivers)->send(new PaidMail($data));
-            return redirect()->route('collections')->with('success', 'Recolección Creada de manera Exitosa');
+            return redirect()->route('collections.view')->with('success', 'Recolección Creada de manera Exitosa');
         }
         else{
-            return redirect()->route('collections')->with('warning', 'Error al guardar Recolección');
+            return redirect()->route('collections.view')->with('warning', 'Error al guardar Recolección');
         }
     }
 
@@ -154,6 +160,14 @@ class CollectController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
+    {
+   
+       $separation = Separation::findOrFail($id);
+       $separation->delete();
+       return redirect()->route('collections.view')->with('success', 'Separación Eliminada de Manera Exitosa');
+    }
+
+    public function delete(string $id)
     {
    
        $separation = Separation::findOrFail($id);

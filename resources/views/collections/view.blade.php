@@ -74,8 +74,7 @@
                                                 <div class="modal-header" style="background-color: #122D7B; color: white">
                                                     <p class="lead">Pagar Recolección</p>
                                                     <p class="lead">Kilos Recolectados : {{ $value->weight }} Kgs</p>
-                                                    <input id="kilosRecolectados" type="text" value={{ $value->weight }} hidden>
-                                                  
+                                                    <input id="kilosRecolectados-{{ $value->id }}" type="text" value={{ $value->weight }} hidden > 
                                                 </div>
                                                
                                                 <div class="modal-body" id="mediumBody">
@@ -98,7 +97,7 @@
                                                                     <div class="col-md-12">
                                                                         <div class="input-group input-group-outline my-3">
                                                                             <label class="form-label">Merma</label>
-                                                                            <input id="merma" name="merma" onchange="calcularPrecio()" type="number" step="0.01" min="0" max="1000"class="form-control text-center">
+                                                                            <input id="merma-{{ $value->id }}" name="merma" onchange="calcularPrecio({{ $value->id }})" type="number" step="0.01" min="0" max="1000"class="form-control text-center" required>
                                                                         </div>
                                                                     </div>         
                                                                 </div>
@@ -106,7 +105,7 @@
                                                                     <div class="col-md-4">
                                                                         <div class=" input-group-outline my-3">
                                                                             <label class="form-label">Peso Final en Kilos:</label>
-                                                                            <input id="final_weight" name="final_weight"  type="number" step="0.01" min="0" max="1000" class="form-control text-center" readonly>
+                                                                            <input id="final_weight-{{ $value->id }}" name="final_weight"  type="number" step="0.01" min="0" max="1000" class="form-control text-center" readonly>
                                                                           </div>
                                                                       </div>
                                                                   <div class="col-md-4">
@@ -114,7 +113,7 @@
                                                                         <label class="form-label">Precio X Kilo </label>
                                                                         @foreach ($materials as $material)
                                                                         @if ($material->id == $value->product_id)
-                                                                            <input id="priceXkilo" name="priceXkilo"  type="number" step="0.01" min="0" max="1000" value ="{{ $material->priceXkilo }}" class="form-control text-center" readonly>
+                                                                            <input id="priceXkilo-{{ $value->id }}" name="priceXkilo"  type="number" step="0.01" min="0" max="1000" value ="{{ $material->priceXkilo }}" class="form-control text-center" readonly>
                                                                         @endif   
                                                                         @endforeach
                                                                         
@@ -123,14 +122,14 @@
                                                                 <div class="col-md-4">
                                                                     <div class=" input-group-outline my-3">
                                                                         <label class="form-label">Pago Total</label>
-                                                                        <input id="payment" name="payment"  type="number" step="0.01" min="0" max="1000" class="form-control text-center" readonly>
+                                                                        <input id="payment-{{ $value->id }}" name="payment"  type="number" step="0.01" min="0" max="1000" class="form-control text-center" readonly>
                                                                       </div>
                                                                   </div>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                   <div class="input-group input-group-outline my-3">
                                                                       <label class="form-label">Notas </label>
-                                                                      <input  name="notes"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="form-control">
+                                                                      <input  name="notes"  type="text"  class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -145,7 +144,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12 text-end">
                                                                     <button type="submit" class="btn btn-success">Recolectar</button>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                                                                 </div>
                                                             </div>
                                                           </form>
@@ -204,21 +203,24 @@
         })
     })
 
-    function calcularPrecio(){
-        var merma = document.getElementById("merma").value;
-        var collectedWeight = document.getElementById("kilosRecolectados").value;
+    function calcularPrecio(id){
+        var merma = document.getElementById(`merma-${id}`).value;
+        var collectedWeight = document.getElementById(`kilosRecolectados-${id}`).value;
         var final_weight = 0;
-        if(merma < parseInt(collectedWeight)){
+        
+        /* if(merma < parseInt(collectedWeight)){ */
             final_weight = collectedWeight - merma;
-            var priceXkilo = document.getElementById("priceXkilo").value;
+            var priceXkilo = document.getElementById(`priceXkilo-${id}`).value;
             var payment = 0;
             payment = priceXkilo * final_weight;
-            document.getElementById("final_weight").value = final_weight;
-            document.getElementById("payment").value = payment;
-        }else{
+            console.log(collectedWeight);
+            console.log( merma);
+            document.getElementById(`final_weight-${id}`).value = final_weight;
+            document.getElementById(`payment-${id}`).value = payment;
+        /* }else{
             alert('Ingrese un valor válido');
             
-        }
+        } */
         
         
     }

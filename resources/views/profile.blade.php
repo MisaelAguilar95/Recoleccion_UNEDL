@@ -15,7 +15,7 @@
             <div class="row col-md-12">
                 <div class="form-group col-md-4 input-group-outline">
                     <label class="form-control-label" for="input-username">Nombre:</label>
-                    <input name="name" type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="input-group input-group-outline" value="{{ auth()->user()->name }}" readonly>
+                    <input name="name" type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9, ]/, '')" class="input-group input-group-outline" value="{{ auth()->user()->name }}" readonly>
                 </div>
                 <div class="form-group col-md-4 input-group-outline">
                     <label class="form-control-label" for="input-username">Email:</label>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group col-md-4 input-group-outline">
                     <label class="form-control-label" for="input-username">Nivel:</label>
-                    <input name="level"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="input-group input-group-outline" value="{{ auth()->user()->level }}" readonly>
+                    <input name="level"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9, ]/, '')" class="input-group input-group-outline" value="{{ auth()->user()->level }}" readonly>
                 </div>
             </div>
         </div>

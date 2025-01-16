@@ -55,6 +55,7 @@
                           <option value="EDL 90"  class="form-control">EDL 90</option>
                           <option value="EDL 324"  class="form-control">EDL 324</option>
                           <option value="EDL 404"  class="form-control">EDL 404</option>
+                          <option value="CASA IVEDL"  class="form-control">CASA IVEDL</option>
                         </select>
                       </div>
                     </div>

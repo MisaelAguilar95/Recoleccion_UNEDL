@@ -96,22 +96,22 @@
                                                                 <div class="col-md-12">
                                                                   <div class="input-group input-group-outline my-3">
                                                                       <label class="form-label">Notas </label>
-                                                                      <input  name="notes"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="form-control">
+                                                                      <input  name="notes"  type="text" class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6 text-center" id="img" style="display:none">
+                                                            <div class="row col-md-12">
+                                                                <div class="col-md-12 text-center" id="img" style="display:none">
                                                                     <img id="img_separation" name="img_separation" src="#" alt="Imagen" style="width: 180px" required />
                                                                 </div>
-                                                                <div class="col-md-6 text-center">
-                                                                    <button class="btn btn-primary"><input class="form-control" name="img" accept="image/png, image/jpeg" type='file' id="imgInp" required /> <br></button>
+                                                                <div class="col-md-12 text-center">
+                                                                    <button class="btn btn-primary"><input class="form-control" name="img" accept="image/png, image/jpeg" type='file' id="imgInp" required multiple /> <br></button>
                                                               </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-12 text-end">
                                                                     <button type="submit" class="btn btn-success">Recolectar</button>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                                                                 </div>
                                                             </div>
                                                           </form>
@@ -123,7 +123,7 @@
                                         {{-- <a href="{{ route('collections.edit', $value->id) }}" type="button" class="btn btn-warning"><span class="material-icons text-md">
                                             edit_note
                                         </span></a> --}}
-                                        <form action="{{ route('collections.destroy', $value->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Desea Eliminar registro # {{ $value->id }} ')">
+                                        <form action="{{ route('collections.delete', $value->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Desea Eliminar registro # {{ $value->id }} ')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger m-0"><span class="material-icons text-md">
@@ -154,6 +154,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function(){
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 document.getElementById("img").style.display="block";

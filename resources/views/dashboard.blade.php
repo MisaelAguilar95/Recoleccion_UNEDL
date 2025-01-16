@@ -49,7 +49,7 @@
               <i class="material-icons opacity-10">recycling</i>
             </div>
             <div class="text-end pt-1">
-              <p class="text-sm mb-0 text-capitalize">Total de Separaciones</p>
+              <p class="text-sm mb-0 text-capitalize">Separaciones Recolectadas</p>
               <h4 class="mb-0">{{ count($separations) }}</h4>
             </div>
           </div>
@@ -141,7 +141,7 @@
             <hr class="dark horizontal">
             <div class="d-flex ">
               <i class="material-icons text-sm my-auto me-1">schedule</i>
-              <p class="mb-0 text-sm"> Año 2024 </p>
+              <p class="mb-0 text-sm"> Año 2025 </p>
             </div>
           </div>
         </div>
@@ -160,7 +160,7 @@
             <hr class="dark horizontal">
             <div class="d-flex ">
               <i class="material-icons text-sm my-auto me-1">schedule</i>
-              <p class="mb-0 text-sm">Año 2024</p>
+              <p class="mb-0 text-sm">Año 2025</p>
             </div>
           </div>
         </div>
@@ -197,7 +197,11 @@ $(document).ready(function(){
   var dickgs = 0;
 
   for(i=0; i< separations.length; i++){
-    if(separations[i]['updated_at'].slice(5, 7) == '01'){
+    console.log(separations[i]['updated_at'].slice(0, 4));
+  if(separations[i]['updated_at'].slice(0, 4)=='2025'){
+
+  
+    if(separations[i]['updated_at'].slice(5, 7) == '01' ){
       ene += separations[i]['payment']; 
       enekgs += separations[i]['weight']; 
     }
@@ -221,6 +225,7 @@ $(document).ready(function(){
       jun += separations[i]['payment']; 
       junkgs += separations[i]['weight']; 
     }
+  }
   //console.log(separations[i]['updated_at'].slice(5, 7));
   }
   //console.log(separations[0]['created_at']);
@@ -230,7 +235,7 @@ new Chart(ctx2, {
   data: {
     labels: ["Ene","Feb","Mar","Abr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
-      label: "Mobile apps",
+      label: "Pago : $",
       tension: 0,
       borderWidth: 0,
       pointRadius: 5,
@@ -241,7 +246,7 @@ new Chart(ctx2, {
       borderWidth: 4,
       backgroundColor: "transparent",
       fill: true,
-      data: [ene, feb, mar, abr, may, jun, 0, 0, 0,0,0,0],
+      data: [ene, feb, mar, abr, may, jun, jul, ago, sep,oct,nov,dic],
       maxBarThickness: 6
     }],
   },
@@ -310,7 +315,7 @@ new Chart(ctx3, {
   data: {
     labels: ["Ene","Feb","Mar","Abr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
-      label: "Mobile apps",
+      label: "Kilos : ",
       tension: 0,
       borderWidth: 0,
       pointRadius: 5,
@@ -320,7 +325,7 @@ new Chart(ctx3, {
       borderWidth: 4,
       backgroundColor: "transparent",
       fill: true,
-      data: [enekgs, febkgs, markgs, abrkgs, maykgs, junkgs, 0, 0, 0,0,0,0],
+      data: [enekgs, febkgs, markgs, abrkgs, maykgs, junkgs, julkgs, agokgs, sepkgs, octkgs, novkgs,dickgs],
       maxBarThickness: 6
     }],
   },

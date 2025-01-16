@@ -18,17 +18,18 @@
             <div class="row col-md-12">
                 <div class="form-group col-md-4 ">
                     <label class="form-control-label" for="input-username">Nombre:</label>
-                    <input name="title"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="input-group " value="{{ $product->title }}" >
+                    <input hidden type="text" name="modify_user_id" value="{{ auth()->user()->id }}">
+                    <input name="title"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9, ]/, '')" class="input-group " value="{{ $product->title }}" >
                 </div>
                 <div class="form-group col-md-8 ">
                     <label class="form-control-label" for="input-username">Descripción:</label>
-                    <input name="description"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="input-group" value="{{ $product->description }}" >
+                    <input name="description"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9, ]/, '')" class="input-group" value="{{ $product->description }}" >
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="form-group col-md-4 ">
                     <label class="form-control-label" for="input-username">Código del Producto:</label>
-                    <input name="product_code"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" class="input-group " value="{{ $product->product_code }}" >
+                    <input name="product_code"  type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9, ]/, '')" class="input-group " value="{{ $product->product_code }}" >
                 </div>
                 <div class="form-group col-md-4 ">
                   <label class="form-control-label" for="input-username">Fecha de Creación:</label>

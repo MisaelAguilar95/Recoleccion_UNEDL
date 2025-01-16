@@ -46,7 +46,15 @@
                   <form action="{{ route('register.save') }}" method="POST" class="user">
                     @csrf
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Nombre</label>
+                        <select class="form-select" name="level" id="level" required>
+                          <option value="usuario"  class="form-control">Seleccione un perfil ...</option>
+                          <option value="usuario"  class="form-control">usuario</option>
+                          <option value="recolector"  class="form-control">recolector</option>
+                          <option value="administrador"  class="form-control">administrador</option>
+                        </select>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Nombre Completo</label>
                       <input required name="name" type="text" class="form-control @error('name')isinvalid @enderror">
                       @error('name')
                       <span class="invalid-feedback">{{ $message }}</span>
@@ -69,7 +77,6 @@
                     <div class="input-group input-group-outline mb-3">
                         <label class="form-label">Confirmar Contraseña</label>
                         <input required name="password_confirmation" type="password" class="form-control @error('password_confirmation')isinvalid @enderror">
-                        <input hidden name="level" type="text" class="form-control" value="usuario">
                         @error('password_confirmation')
                         <span class="invalid-feedback">{{ $message }}</span>
                         @enderror

@@ -35,6 +35,7 @@
                         <div class="">
                           <label class="form-label">Usuario: </label>
                           <input hidden class="form-control-input" name="user_id" id="user_id" value="{{ $separation->user_id }}" />
+                          <input hidden class="form-control-input" name="modify_user_id" id="modify_user_id" value="{{ auth()->user()->id }}" />
                           <input class="form-control-input" name="user_name"  value="   {{ $separation->user->name }}" readonly />
                         </div>
                     </div>
@@ -57,6 +58,7 @@
                           <option value="EDL 90"  class="form-control">EDL 90</option>
                           <option value="EDL 324"  class="form-control">EDL 324</option>
                           <option value="EDL 404"  class="form-control">EDL 404</option>
+                          <option value="CASA IVEDL"  class="form-control">CASA IVEDL</option>
                         </select>
                       </div>
                     </div>
@@ -97,6 +99,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-end">
+                      <a href="{{ route('validations') }}" type="button" class="btn btn-warning">
+                        CANCELAR
+                     </a>
                         <button type="submit" class="btn btn-success">ACTUALIZAR SEPARACIÓN</button>
                     </div>
                 </div>

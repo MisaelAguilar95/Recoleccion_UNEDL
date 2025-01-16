@@ -15,6 +15,7 @@ class Separation extends Model
 
     protected $fillable = [
         'user_id',
+        'modify_user_id',
         'product_id',
         'weight',
         'num_bags',
